@@ -22,6 +22,9 @@ wired up from the first commit.
     with `create-release: true`
 - A starter `src/main.rs` (binary) or `src/lib.rs` (library) — the one you don't
   pick is removed automatically.
+- A `set-remote.sh` helper and a "Next steps" section in the project `README.md`,
+  both with the GitHub remote URL already filled in from the GitHub username and
+  crate name.
 
 ## Usage
 
@@ -48,6 +51,24 @@ cargo generate --git https://github.com/uperl/rust-template.git --bin
 
 The `--bin` / `--lib` flag sets `crate_type`, which decides whether `src/main.rs`
 or `src/lib.rs` is kept.
+
+### After generating
+
+`cargo generate` initializes a fresh Git repository but adds no commits and no
+remote. The generated project explains the remaining steps in its `README.md`;
+the short version:
+
+```sh
+sh set-remote.sh                    # git remote add origin git@github.com:<user>/<name>.git
+git add -A
+git commit -m "initial commit"
+git push -u origin main
+```
+
+cargo-generate strips the template's `.git` directory and runs its own `git init`
+last, with no hook after it, so the template can't add the remote directly — it
+can only hand you the pre-filled command. The `post` hook that writes
+`set-remote.sh` only touches files, so it does not require `--allow-commands`.
 
 ## License
 

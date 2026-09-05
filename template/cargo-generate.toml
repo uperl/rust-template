@@ -1,6 +1,9 @@
 [template]
 cargo_generate_version = ">=0.10.0"
 
+[hooks]
+post = ["post-gen.rhai"]
+
 [placeholders.gh-username]
 type = "string"
 prompt = "GitHub username (or organization)"
