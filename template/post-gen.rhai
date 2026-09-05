@@ -9,7 +9,7 @@
 //
 // This hook only touches files, so it does NOT require `--allow-commands`.
 
-let slug = variable::get("gh-username") + "/" + variable::get("project-name");
+let slug = variable::get("gh-username") + "/rust-" + variable::get("project-name");
 let ssh_url = "git@github.com:" + slug + ".git";
 let https_url = "https://github.com/" + slug + ".git";
 let dir = variable::get("project-name");
