@@ -59,7 +59,7 @@ remote. The generated project explains the remaining steps in its `README.md`;
 the short version:
 
 ```sh
-sh set-remote.sh                    # git remote add origin git@github.com:<user>/<name>.git
+sh set-remote.sh                    # git remote add origin ...; then deletes itself
 git add -A
 git commit -m "initial commit"
 git push -u origin main

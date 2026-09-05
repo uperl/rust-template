@@ -13,6 +13,6 @@ git push -u origin main
 ```
 
 The generated `set-remote.sh` runs the `git remote add` line for you (the
-address is already filled in); delete it once the remote is set.
+address is already filled in) and deletes itself once the remote is set.
 
 Delete this section once you're set up.
