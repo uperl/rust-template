@@ -12,6 +12,7 @@
 let slug = variable::get("gh-username") + "/" + variable::get("project-name");
 let ssh_url = "git@github.com:" + slug + ".git";
 let https_url = "https://github.com/" + slug + ".git";
+let dir = variable::get("project-name");
 
 file::write("set-remote.sh", `#!/bin/sh
 # Point this repository at GitHub, then delete this script.
@@ -27,6 +28,7 @@ rm -- "$0"
 print("");
 print("  Next steps -- push this project to GitHub:");
 print("");
+print(`    cd ${dir}`);
 print(`    sh set-remote.sh          # git remote add origin ${ssh_url}`);
 print("    git push -u origin main");
 print("");
