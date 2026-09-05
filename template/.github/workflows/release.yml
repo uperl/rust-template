@@ -32,4 +32,4 @@ jobs:
         uses: uperl/action-rust-release-lib@v1
         with:
           create-release: true
-{% endif %]
+{% endif %}
