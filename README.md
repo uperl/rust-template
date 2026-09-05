@@ -22,7 +22,7 @@ wired up from the first commit.
     with `create-release: true`
 - A starter `src/main.rs` (binary) or `src/lib.rs` (library) — the one you don't
   pick is removed automatically.
-- A `set-remote.sh` helper and a "Next steps" section in the project `README.md`,
+- A `setup.sh` helper and a "Next steps" section in the project `README.md`,
   both with the GitHub remote URL already filled in from the GitHub username and
   crate name.
 
@@ -59,7 +59,7 @@ remote. The generated project explains the remaining steps in its `README.md`;
 the short version:
 
 ```sh
-sh set-remote.sh                    # git remote add origin ...; then deletes itself
+sh setup.sh                         # git remote add origin ...; then deletes itself
 git add -A
 git commit -m "initial commit"
 git push -u origin main
@@ -68,7 +68,7 @@ git push -u origin main
 cargo-generate strips the template's `.git` directory and runs its own `git init`
 last, with no hook after it, so the template can't add the remote directly — it
 can only hand you the pre-filled command. The `post` hook that writes
-`set-remote.sh` only touches files, so it does not require `--allow-commands`.
+`setup.sh` only touches files, so it does not require `--allow-commands`.
 
 ## License
 

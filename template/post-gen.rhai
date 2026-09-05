@@ -3,7 +3,7 @@
 // cargo-generate strips the template's `.git` directory while moving files into
 // place and then runs its own `git init` as the very last step, with no hook
 // after it -- so a hook cannot add a remote that survives into the new project.
-// Instead we drop a `set-remote.sh` helper (address already filled in, and it
+// Instead we drop a `setup.sh` helper (address already filled in, and it
 // removes itself once it succeeds) and print the commands so they're in the
 // terminal scrollback.
 //
@@ -14,7 +14,7 @@ let ssh_url = "git@github.com:" + slug + ".git";
 let https_url = "https://github.com/" + slug + ".git";
 let dir = variable::get("project-name");
 
-file::write("set-remote.sh", `#!/bin/sh
+file::write("setup.sh", `#!/bin/sh
 # Point this repository at GitHub, then delete this script.
 # For HTTPS instead of SSH, swap in: ${https_url}
 set -eu
@@ -29,6 +29,6 @@ print("");
 print("  Next steps -- push this project to GitHub:");
 print("");
 print(`    cd ${dir}`);
-print(`    sh set-remote.sh          # git remote add origin ${ssh_url}`);
+print(`    sh setup.sh          # git remote add origin ${ssh_url}`);
 print("    git push -u origin main");
 print("");
