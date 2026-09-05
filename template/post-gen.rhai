@@ -19,6 +19,8 @@ file::write("set-remote.sh", `#!/bin/sh
 set -eu
 git remote add origin ${ssh_url}
 echo "origin -> $(git remote get-url origin)"
+git add .
+git commit -m 'initial commit'
 rm -- "$0"
 `);
 
@@ -26,7 +28,5 @@ print("");
 print("  Next steps -- push this project to GitHub:");
 print("");
 print(`    sh set-remote.sh          # git remote add origin ${ssh_url}`);
-print("    git add -A");
-print("    git commit -m 'initial commit'");
 print("    git push -u origin main");
 print("");
