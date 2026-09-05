@@ -10,13 +10,16 @@ wired up from the first commit.
   as a dependency and, for binaries, [`cargo-deb`](https://crates.io/crates/cargo-deb)
   metadata for building `.deb` packages.
 - MIT `LICENSE`.
-- GitHub Actions CI (`.github/workflows/ci.yml`) via
-  [`uperl/action-rust-ci`](https://github.com/uperl/action-rust-ci).
-- GitHub Actions release automation (`.github/workflows/release.yml`):
-  - binaries use
+- GitHub Actions CI (`.github/workflows/ci.yml`) that calls the reusable workflow
+  from [`uperl/action-rust-ci`](https://github.com/uperl/action-rust-ci), running
+  on pushes to `main` and on pull requests.
+- GitHub Actions release automation (`.github/workflows/release.yml`), running on
+  pushes to `main`:
+  - binaries call the reusable workflow from
     [`uperl/action-rust-release-bin`](https://github.com/uperl/action-rust-release-bin)
-  - libraries use
+  - libraries check out the repo and run
     [`uperl/action-rust-release-lib`](https://github.com/uperl/action-rust-release-lib)
+    with `create-release: true`
 - A starter `src/main.rs` (binary) or `src/lib.rs` (library) — the one you don't
   pick is removed automatically.
 
@@ -28,21 +31,23 @@ Install `cargo-generate` if you don't have it:
 cargo install cargo-generate
 ```
 
-Generate a new project:
+Generate a new project, passing `--bin` for an executable or `--lib` for a
+library:
 
 ```sh
-cargo generate --git https://github.com/uperl/rust-template.git
+cargo generate --git https://github.com/uperl/rust-template.git --bin
 ```
 
-You'll be prompted for:
+`cargo-generate` asks for the crate name, then the template prompts for:
 
-| Placeholder           | Description                          | Default  |
-|-----------------------|--------------------------------------|----------|
-| `project-name`        | Name of the crate                    | —        |
-| `gh-username`         | GitHub username or organization      | `uperl`  |
-| `project-description` | Short description of the project     | —        |
-| `project-publisher`   | Publisher name (used for releases)   | `uperl`  |
-| `crate_type`          | `bin` or `lib`                       | —        |
+| Prompt                              | Used for                                                              | Default |
+|-------------------------------------|----------------------------------------------------------------------|---------|
+| GitHub username (or organization)   | `repository` URL in `Cargo.toml`                                     | `uperl` |
+| Project description                 | `description` in `Cargo.toml` (and the `.deb` metadata for binaries) | —       |
+| Project publisher                   | publisher name for release automation                                | `uperl` |
+
+The `--bin` / `--lib` flag sets `crate_type`, which decides whether `src/main.rs`
+or `src/lib.rs` is kept.
 
 ## License
 

@@ -16,7 +16,7 @@ jobs:
   release:
     uses: uperl/action-rust-release-bin/.github/workflows/release.yml@v1
     with:
-      publisher: "Graham Ollis"
+      publisher: "{{project-publisher}}"
 {% else %}
 jobs:
   tag:
