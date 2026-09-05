@@ -10,6 +10,7 @@ license = "MIT"
 anyhow = "1.0.104"
 
 {% if crate_type == "bin" %}
+[package.metadata.deb]
 maintainer = "Nobody <devnull@wdlabs.com>"
 copyright = "Nobody"
 extended-description = """\
